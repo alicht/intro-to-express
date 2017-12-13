@@ -95,7 +95,8 @@ You can also create your own modules that can be imported in the same way.
 # Demonstrating Asynchronous API
 
 ## Narwhal coffee shop
-![kitsch_n_glam_narwhal_coffee_mug_1](https://user-images.githubusercontent.com/6153182/33921951-53525c72-df95-11e7-848c-bb19b5e74e1b.jpg)
+![screen shot 2017-12-12 at 11 46 50 pm](https://user-images.githubusercontent.com/6153182/33922157-c8d8f3ce-df96-11e7-9b53-353bb79cd3e2.png)
+
 
 
 let's type this code into our browser
