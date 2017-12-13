@@ -1,6 +1,32 @@
 # Intro to Express
 
-# Why use Express?
+# Demonstrating Asynchronous API
+
+## Narwhal coffee shop
+![screen shot 2017-12-12 at 11 46 50 pm](https://user-images.githubusercontent.com/6153182/33922157-c8d8f3ce-df96-11e7-9b53-353bb79cd3e2.png)
+
+
+
+let's type this code into our browser
+```javascript
+console.log('First');
+console.log('Second');
+```
+but what if we were to run this asynchronously?
+```javascript
+setTimeout(function() {
+   console.log('fancy coffee order');
+   }, 3000);
+console.log('black coffee');
+```
+
+Using non-blocking asynchronous APIs is even more important on Node than in the browser, because Node is a single threaded event-driven execution environment. "single threaded" means that all requests to the server are run on the same thread (rather than being spawned off into separate processes). This model is extremely efficient in terms of speed and server resources.
+
+# MVC
+
+![Alt Text](https://media.giphy.com/media/ACpKIKVrOXuKY/giphy.gif)
+
+# Why use Express? ie what can Express do that Node can't?
 A: This is an Node server
 ```javascript
 // Load HTTP module
@@ -92,27 +118,7 @@ let app = express();
 You can also create your own modules that can be imported in the same way.
 ```
 
-# Demonstrating Asynchronous API
 
-## Narwhal coffee shop
-![screen shot 2017-12-12 at 11 46 50 pm](https://user-images.githubusercontent.com/6153182/33922157-c8d8f3ce-df96-11e7-9b53-353bb79cd3e2.png)
-
-
-
-let's type this code into our browser
-```javascript
-console.log('First');
-console.log('Second');
-```
-but what if we were to run this asynchronously?
-```javascript
-setTimeout(function() {
-   console.log('First');
-   }, 3000);
-console.log('Second');
-```
-
-Using non-blocking asynchronous APIs is even more important on Node than in the browser, because Node is a single threaded event-driven execution environment. "single threaded" means that all requests to the server are run on the same thread (rather than being spawned off into separate processes). This model is extremely efficient in terms of speed and server resources, but it does mean that if any of your functions call synchronous methods that take a long time to complete, they will block not just the current request, but every other request being handled by your web application.
 
 
 
