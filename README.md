@@ -178,6 +178,11 @@ You can also create your own modules that can be imported in the same way.
 ```
 
 # Demonstrating Asynchronous API
+
+## Narwhal coffee shop
+![kitsch_n_glam_narwhal_coffee_mug_1](https://user-images.githubusercontent.com/6153182/33921951-53525c72-df95-11e7-848c-bb19b5e74e1b.jpg)
+
+
 let's type this code into our browser
 ```javascript
 console.log('First');
