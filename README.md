@@ -6,7 +6,7 @@
 * What MVC is 
 * Why use Express over Node?
 * Breaking down everything that goes into a route response cycle
-* Coding along our first Express app!
+* Coding our very own Express app!
 
 ## Demonstrating Asynchronous API
 
