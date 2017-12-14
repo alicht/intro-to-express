@@ -27,9 +27,14 @@ setTimeout(function() {
 console.log('black coffee');
 ```
 
-Using non-blocking asynchronous APIs is even more important on Node than in the browser, because Node is a single threaded event-driven execution environment. "single threaded" means that all requests to the server are run on the same thread (rather than being spawned off into separate processes). This model is extremely efficient in terms of speed and server resources.
+## Thanks ELI5 reddit! :alien:
+![screen shot 2017-12-14 at 1 38 29 pm](https://user-images.githubusercontent.com/6153182/34008732-5222aba0-e0d4-11e7-8252-9321b1f49702.png)
 
-# MVC
+
+
+The Asynchronous model is extremely efficient in terms of speed and server resources.
+
+# Next up: MVC
 
 2 ways that to visualize MVC:
 
@@ -53,7 +58,7 @@ These common web-development tasks are not directly supported by Node itself.
 
 # Enter Express
 
-![sans --save](https://user-images.githubusercontent.com/6153182/34006504-9786a49c-e0cc-11e7-8aac-3c255467767c.png)
+![screen shot 2017-12-14 at 12 43 37 pm](https://user-images.githubusercontent.com/6153182/34008872-c11372d8-e0d4-11e7-84be-49b3cac3cc56.png)
 
 You can use Express middleware to add support for cookies, sessions, and users, getting POST/GET parameters, etc. You can use any database mechanism supported by Node (Express does not define any database-related behaviour).
 
@@ -101,7 +106,7 @@ The `app.get()` specifies a callback function that will be invoked whenever ther
 # Modules
 Express is itself a module!
 
--  A module is a JavaScript library/file that you can import into other code using Node's require() function. Express itself is a module, as are the middleware and database libraries that we use in our Express applications.
+-  A module is a JavaScript library/file that you can import into other code using Node's `require()` function. Express itself is a module, as are the middleware and database libraries that we use in our Express applications.
 
 
 # Codealong time!
@@ -147,7 +152,7 @@ Not initially, and it's annoying AF :/
 But...
 
 ## Nodemon aka `npm run dev` 
-What is `nodemon` you ask? It is a utility that will monitor your source file (app.js in our case) and automatically restart server. Otherwise, you would need to run `node app.js` after every small change in your file, annoying right 🙄 . We need to install it first, hence in your terminal run
+What is `nodemon` you ask? It is a utility that will monitor your source file (app.js in our case) and automatically restart server. Otherwise, you would need to run `node app.js` after every small change in your file, which is super super annoying 🙄. We need to install it first, so in your terminal run
 
 ```bash
 npm install --save nodemon
@@ -220,7 +225,7 @@ app.get('/cats', function(req,res){
 
 ### but we're hear to build a quotes app, so let's focus on that 
 
-##### (side point)... where are we getting the quotes we'll be referring to?
+##### (side point) uh... where are we getting our quotes from?
 
 Glad you asked! (see accompanying folder)
 - `mkdir db` & `touch quotes.js`, paste boilerplate code 
@@ -233,7 +238,9 @@ At the bottom of `app.js` we're going to add:
 app.use('/quotes', quotes);
 ```
 #### Why?
+-  middleware- McDonalds example (HT Joe)
 this it will tell express middleware to use everything associated with quotes route and add a callback `quotes` to be executes on call:
+
 
 ### We should probably create a separate routes folder for our quotes code...
 
@@ -279,6 +286,8 @@ in our `routes/quotes.js` we have to add this so we can export it.
 ```javascript
 module.exports = router;
 ```
+`module.exports` is the object that's actually returned as the result of a require call.
+
 > Note: don't forget to import the quotes as well :)
 
 
