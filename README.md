@@ -145,7 +145,7 @@ app.listen(port, function() {
 ```
 Notice the `listen` verb here - this can also be use, post, put, delete, etc (these are all methods of the instance of [Express](https://expressjs.com/en/api.html)).
 
-## Note: Nodemon doesn't work but `npm run dev` does
+## Nodemon aka `npm run dev` 
 What is `nodemon` you ask? It is a utility that will monitor your source file (app.js in our case) and automatically restart server. Otherwise, you would need to run `node app.js` after every small change in your file, annoying right 🙄 . We also need to install it first, hence in your terminal run
 
 ```bash
@@ -163,20 +163,19 @@ Then, we need to run our app. In your `package.json`, modify "scripts" to reflec
   },
 ```
 
+run `npm node dev`
 
-Navigate to `http://localhost:3000` and voila!
+Navigate to `http://localhost:3000` and... boom! goes the dynamite.
 
 Now this is pretty awesome (isn't it?) but it doesn't really do anything. Plus, what if we want to start creating pages instead and render stuff on the page.
 
-## Note: Nodemon doesn't work but `npm run dev` does
-
-# Routing in Express - Intro (5 mins)
+# Routing in Express 
 
 **Definition:** Routing refers to the definition of application end points (URIs) and how they respond to client requests. They can receive any of the http verbs (GET, POST, PUT, DELETE), and need to be prepared to handle them accordingly. 
 -  Consider them resource identifiers, where a typical resource can be an image, webpage, music file, or a request to take kick off a function call. 
 -  A function call could be something like executing a call to update/delete/put an entry in a database.
 
-### Let's break down selective parts of a router
+### Let's break down all the parts of a router
 
 - **"/"**: Sets the pattern for our route. In this case, it's the root page
 - **req**: Represents incoming http `request` object for end point resource.
@@ -202,12 +201,12 @@ app.get('/', function(req, res) {
 ```
 Routes in Express are created using methods named after HTTP verbs. In the example above, we created a route to respond to GET requests at the root of the app. You will have a corresponding method on the app object for all the HTTP verbs.  In this example, we'll send back text as a response.
 
-## Add routes to our application Codealong (20 min)
+## Adding more routes to our application
 
 ```javascript
 const express = require('express');
-const app     = express();
-const port    = process.env.PORT || 3000;
+const app = express();
+const port = process.env.PORT || 3000;
 
 app.get('/', function(req, res) {
   res.send('Hello, Newman! <h1>Newman! #clenchingfist </h1>');
@@ -222,7 +221,17 @@ app.get('/cats', function(req,res){
 })
 ```
 
-At the bottom of `app.js` add  this it will tell express middleware to use everything associated with quotes route and add a callback `quotes` to be executes on call:
+### but we're hear to build a quotes app, so let's focus on that 
+
+
+
+At the bottom of `app.js` we're going to add:
+
+```javascript
+app.use('/quotes', quotes);
+```
+#### Why?
+this it will tell express middleware to use everything associated with quotes route and add a callback `quotes` to be executes on call:
 
 ```javascript
 app.use('/quotes', quotes);
@@ -246,7 +255,7 @@ REMEMBER: to export it! 👍
 
 #### Creating a quotes module
 
-Let's move this module into another file to separate it from our `app.js`
+Let's put this new module into another file to separate it from our `app.js`
 
 ```bash
 $ mkdir routes
@@ -254,6 +263,15 @@ $ touch routes/quotes.js
 ```
 
 Inside this file we need to move all of our route handlers for `quotes` and at the end of the file, we need to export our router:
+
+Now let's go back to our `app.js`, and we need to require this route at the top so we can access it:
+
+```javascript
+const quotes = require('./routes/quotes');
+```
+
+
+
 
 ```javascript
 const router  = express.Router();
@@ -266,14 +284,14 @@ module.exports = router;
 ```
 > Note: don't forget to import the quotes as well :)
 
-Now inside our app.js, let's require this router at the top:
+Now let's go back to our app.js, let's require this router at the top:
 
 ```javascript
 const quotes = require('./routes/quotes');
 
 ```
 
-## Restful Routing - Intro (10 mins)
+## Restful Routing 
 
 We will use the RESTful standard to build our web apps. Today, we will only cover how to handle GET requests, but we can create callbacks for all types of requests. Let's create some routes for our quotes!
 
