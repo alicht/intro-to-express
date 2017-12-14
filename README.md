@@ -13,8 +13,7 @@
 ![screen shot 2017-12-14 at 1 36 56 am](https://user-images.githubusercontent.com/6153182/33978785-5a6e3e06-e06f-11e7-9362-78611b127468.png)
 
 
-
-let's type this code into our browser
+let's type this code into our console
 ```javascript
 console.log('insert fancy order');
 console.log('regular black coffee');
@@ -31,9 +30,17 @@ Using non-blocking asynchronous APIs is even more important on Node than in the 
 
 # MVC
 
+2 ways that to visualize MVC:
+
 ![Alt Text](https://media.giphy.com/media/ACpKIKVrOXuKY/giphy.gif)
 
-# Why use Express? ie what can Express do that Node can't?
+![Alt Text](https://media.giphy.com/media/zhG2sDdPpXgDS/giphy.gif)
+
+## Ok fine- here's a more "computer-y" image 
+
+![complete-mvc-on-nodejs-26-638](https://user-images.githubusercontent.com/6153182/34004783-d5e7cc80-e0c6-11e7-946d-39a263264e38.jpg)
+
+# But why use Express? ie what can Express do that Node can't?
 
 These common web-development tasks are not directly supported by Node itself. 
 -  handling for different HTTP verbs (e.g. GET, POST, DELETE, etc.), 
@@ -45,11 +52,10 @@ These common web-development tasks are not directly supported by Node itself.
 
 # Enter Express
 
-
 You can use Express middleware to add support for cookies, sessions, and users, getting POST/GET parameters, etc. You can use any database mechanism supported by Node (Express does not define any database-related behaviour).
 
 
-# What does Express code look like?
+# So what does Express code look like?
 
 Glad you asked! Let's take a look 
 
@@ -78,12 +84,12 @@ app.listen(3000, function() {
 
 ![Alt Text](https://media.giphy.com/media/eSMZFmPb6pbk4/giphy.gif)
 
-### What happened?
+### Breakdown- what happened?
 
 -  **First line** `require()` imports the express module and creates an Express application. 
 -  **Second line** this object, which is traditionally named app, now has access to methods for routing HTTP requests, configuring middleware, rendering HTML views, registering a template engine
 
--  **Middle part** of the code (ie `app.get`) shows a route definition. 
+-  **Middle part** of the code (ie `app.get`) shows a route definition.  We'll touch on this in more detail below.
 
 The `app.get()` specifies a callback function that will be invoked whenever there is an HTTP GET request with a path ('/') relative to the site root. The callback function takes a request and a response object as arguments, and simply calls send() on the response to return the string "Hello, Newman."
 
@@ -114,7 +120,7 @@ Check out the package.json file:
 
 ```json
 "dependencies": {
-  "express": "^4.11.1"
+  "express": "^4.16.2"
 }
 ```
 
@@ -132,15 +138,20 @@ app.listen(port, function() {
 ```
 Notice the `listen` verb here - this can also be use, post, put, delete, etc (these are all methods of the instance of [Express](https://expressjs.com/en/api.html)).
 
+##### um, is this like HTML? Can I refresh after every change?
+Not initially, and it's annoying AF :/
+
+But...
+
 ## Nodemon aka `npm run dev` 
-What is `nodemon` you ask? It is a utility that will monitor your source file (app.js in our case) and automatically restart server. Otherwise, you would need to run `node app.js` after every small change in your file, annoying right 🙄 . We also need to install it first, hence in your terminal run
+What is `nodemon` you ask? It is a utility that will monitor your source file (app.js in our case) and automatically restart server. Otherwise, you would need to run `node app.js` after every small change in your file, annoying right 🙄 . We need to install it first, hence in your terminal run
 
 ```bash
 npm install --save nodemon
 ```
 
 
-Then, we need to run our app. In your `package.json`, modify "scripts" to reflect this:
+Then, we need to run our app. In your `package.json`, modify `scripts` to reflect this:
 
 ```js
   "scripts": {
@@ -149,6 +160,7 @@ Then, we need to run our app. In your `package.json`, modify "scripts" to reflec
     "dev": "nodemon app.js"
   },
 ```
+and let's use the method:
 
 run `npm node dev`
 
@@ -172,14 +184,8 @@ Now this is pretty sweet but it's just a static page. Plus, what if we want to s
 
 [ExpressJS 4.0](https://scotch.io/tutorials/learn-to-use-the-new-router-in-expressjs-4) comes with the new Router. Router is like a mini Express application. It doesn’t bring in views or settings but provides us with the routing APIs like `.use`, `.get`, `route` etc..
 
-### Benefits of using express.Router():
-
-- Helpful in separating out concerns
-- Always has a dedicated handler to address any routes being requested.
-- Modularity, mountable, and helps keep things DRY
-
 Let's look at routes and handler callback functions in Express routes:
-Example:
+### An Example in play:
 ```javascript
 app.get('/', function(req, res) {
   res.send('Hello, Newman! <h1>Newman! #clenchingfist</h1>');
@@ -237,6 +243,13 @@ $ touch routes/quotes.js
 ```
 
 Inside this file we need to move all of our route handlers for `quotes` and at the end of the file, we need to export our router:
+
+### Benefits of using express.Router():
+
+- Helpful in separating out concerns
+- Always has a dedicated handler to address any routes being requested.
+- Modularity, mountable, and helps keep things DRY
+
 
 ```javascript
 const express = require('express');
