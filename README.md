@@ -120,6 +120,201 @@ You can also create your own modules that can be imported in the same way.
 
 
 
+## Let's create Quotes app using Node and Express - I do - You do (20 min)
+
+Get to it:
+
+1. `mkdir express-quotes`
+2. `cd express-quotes`
+3. `npm init` (Hit enter to accept the defaults and see the new [package.json](https://docs.npmjs.com/cli/init) file
+4. `npm install express --save` (The `--save` option adds the module as a dependency in your package.json file. This allows anyone looking at your app (i.e. a dev team member) to be able to see what your app is "made of" and if they clone your app and run `npm install` all dependencies will be installed.
+5. `touch app.js` in express-quotes directory
+
+Check out the package.json file:
+
+```json
+"dependencies": {
+  "express": "^4.11.1"
+}
+```
+
+Let's start coding!
+
+```javascript
+// app.js
+const express = require('express');
+const app     = express();
+const port    = process.env.PORT || 3000;
+
+app.listen(port);
+console.log(`express-quotes app running on port ${port}...`);
+```
+Notice the `listen` verb here - this can also be use, post, put, delete, etc. (As these are methods of the instance of [Express](https://expressjs.com/en/api.html)).
+
+Notice `.env.PORT` we could hardcode the port and set it to 3000, but it's not the best practice, since the port may be not available...
+
+In order for this to work, we need to
+```bash
+touch .env
+```
+and inside set `PORT=5000`.
+
+Then, we need to run our app. In your `package.json`, modify "scripts" to reflect this:
+
+```js
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+```
+What is `nodemon` you ask? It is a utility that will monitor your source file (app.js in our case) and automatically restart server. Otherwise, you would need to run `node app.js` after every small change in your file, annoying right 🙄 . We also need to install it first, hence in your terminal run
+
+```bash
+npm install --save nodemon
+```
+
+Navigate to `http://localhost:3000` and voila!
+
+Now this is pretty awesome (isn't it?) but it doesn't really do anything. Plus, what if we want to start creating pages instead and render stuff on the page.
+
+## Routing in Express - Intro (5 mins)
+
+**Definition:** Routing refers to the definition of application end points (URIs) and how they respond to client requests. They can receive any of the http verbs (GET, POST, PUT, DELETE), and need to be prepared to handle them accordingly. Consider them resource identifiers, where a typical resource can be an image, webpage, music file, or a request to take kick off a function call. A function call could be something like executing a call to update/delete/put an entry in a database.
+
+### Let's break down selective parts of a router
+
+- **"/"**: Sets the pattern for our route. In this case, it's the root page
+- **req**: Represents incoming http `request` object for end point resource.
+- **res**: Represents the `resource` object that you give to the user/client/requestor. Resource can be a webpage, video file etc...
+**Since both `req` and `res` are objects, they have various methods we can use to manipulate**
+- **res.send:** is one of the methods of `response` object. It sends the response back to the requestor.
+
+[ExpressJS 4.0](https://scotch.io/tutorials/learn-to-use-the-new-router-in-expressjs-4) comes with the new Router. Router is like a mini Express application. It doesn’t bring in views or settings but provides us with the routing APIs like `.use`, `.get`, `route` etc..
+
+### Benefits of using express.Router():
+
+- Helpful in separating out concerns
+- Always has a dedicated handler to address any routes being requested.
+- Modularity, mountable, and helps keep things DRY
+
+Let's look at routes and handler callback functions in Express routes:
+Example:
+```javascript
+app.get('/', function(req, res) {
+  res.send('HELLOoOOOoOOoOOOooO, WORLD! <h1>This is ROOT (home) route</h1>');
+
+});
+```
+Routes in Express are created using methods named after HTTP verbs. In the example above, we created a route to respond to GET requests at the root of the app. You will have a corresponding method on the app object for all the HTTP verbs.  In this example, we'll send back text as a response.
+
+## Add routes to our application Codealong (20 min)
+
+```javascript
+const express = require('express');
+const app     = express();
+const port    = process.env.PORT || 3000;
+
+app.get('/', function(req, res) {
+  res.send('HELLOoOOOoOOoOOOooO, WORLD! <h1>This is ROOT route</h1>');
+});
+
+app.get('/quotes', function(req, res) {
+  res.send('You hit quotes route');
+});
+
+app.get('/cats', function(req,res){
+  res.send('This is cats route');
+})
+```
+
+At the bottom of `app.js` add  this it will tell express middleware to use everything associated with quotes route and add a callback `quotes` to be executes on call:
+
+```javascript
+app.use('/quotes', quotes);
+```
+Then move to work in `routes/quotes.js` and ...
+First we import express into `quotes.js` then we define our _router_ . This is what handles our routing. It's normally better to use this way of doing routes (and extracting them into their own files) as it makes applications more modular, and you won't have a 500 line app.js.
+
+This way we created a dedicated router for this resource (quotes) and namespace its routes.
+Hence we can separate all the route handlers in the different file: `routes/quotes.js` => Take out the from `app.js`
+
+```js
+function(req, res) {
+  res.send('You hit quotes route');
+}
+```
+and bring it to the quotes module, give a name to that function, and...
+
+REMEMBER: to export it! 👍
+
+
+#### Creating a quotes module
+
+Let's move this module into another file to separate it from our `app.js`
+
+```bash
+$ mkdir routes
+$ touch routes/quotes.js
+```
+
+Inside this file we need to move all of our route handlers for `quotes` and at the end of the file, we need to export our router:
+
+```javascript
+const router  = express.Router();
+
+router.get('/', function(req, res) {
+  res.send('This still works 👍');
+});
+
+module.exports = router;
+```
+> Note: don't forget to import the quotes as well :)
+
+Now inside our app.js, let's require this router at the top:
+
+```javascript
+const quotes = require('./routes/quotes');
+
+```
+
+## Restful Routing - Intro (10 mins)
+
+We will use the RESTful (should be familiar for you since Vince introduced it on Monday) standard to build our web apps. Today, we will only cover how to handle GET requests, but we can create callbacks for all types of requests. Let's create some routes for our quotes!
+
+```javascript
+// set up root route using 'GET' http verb
+// get ALL quotes
+router.get('/', function(req, res){
+  res.json({
+    quotes
+  });
+});
+
+router.get('/:id', function(req, res){
+  // let's reassign our parameter to `id` for readability
+  let id = req.params.id;
+  // id is passed as a string
+  // need to parse it first
+  parseInt(id);
+  // now we can render it on the page!
+  res.send(
+    `
+    <h1>${quotes[id].text}</h1>
+    <h2>Genre: ${quotes[id].genre}</h2>
+    <h3> By ${quotes[id].author}</h3>
+    `
+  )
+});
+```
+## Independent Practice (30 minutes)
+
+In the LECTURE directory you will find a `lab` folder. Look for instructions there.
+
+## Conclusion (5 mins)
+A framework can be overwhelming at the start, after a couple of days you will see how it makes your life easier.  We will work more on how to make RESTful controllers, this is just an introduction.
+
+
 
 
 
