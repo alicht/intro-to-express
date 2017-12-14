@@ -1,6 +1,13 @@
 # Intro to Express
 
-# Demonstrating Asynchronous API
+## Learning objectives
+
+* Explain what Prototypes are and demonstrate why they're an essential JavaScript feature
+* What MVC is 
+* Use the ```new``` keyword to create new objects with shared properties
+* Create a class that inherits from another using ```extends``` and ```super``` keywords
+
+## Demonstrating Asynchronous API
 
 ## Narwhal coffee shop
 ![screen shot 2017-12-14 at 1 36 56 am](https://user-images.githubusercontent.com/6153182/33978785-5a6e3e06-e06f-11e7-9362-78611b127468.png)
@@ -27,54 +34,31 @@ Using non-blocking asynchronous APIs is even more important on Node than in the 
 ![Alt Text](https://media.giphy.com/media/ACpKIKVrOXuKY/giphy.gif)
 
 # Why use Express? ie what can Express do that Node can't?
-A: This is an Node server
-```javascript
-// Load HTTP module
-let http = require("http");
-
-// Create HTTP server and listen on port 8000 for requests
-http.createServer(function(request, response) {
-
-   // Set the response HTTP header with HTTP status and Content type
-   response.writeHead(200, {'Content-Type': 'text/plain'});
-   
-   // Send the response body "Hello World"
-   response.end('Hello World\n');
-}).listen(8000);
-
-// Print URL for accessing server
-console.log('Server running at http://127.0.0.1:8000/');
-```
 
 These common web-development tasks are not directly supported by Node itself. 
--  If you want to add specific handling for different HTTP verbs (e.g. GET, POST, DELETE, etc.), 
--  separately handle requests at different URL paths ("routes")
+-  handling for different HTTP verbs (e.g. GET, POST, DELETE, etc.), 
+-  separately handle requests at different URL patterns (ie "routes")
+-  methods to specify which template engine is used (ie "view")
 -  serve static files
--  use templates to dynamically create the response,
+-  use templates to dynamically create the response
 
 
 # Enter Express
 
-Express...
--  provides methods to specify what function is called for a particular HTTP verb (GET, POST, SET, etc.) 
--  and URL pattern ("Route")
--  methods to specify what template ("view") engine is used
--  where template files are located
--  and what template to use to render a response. 
 
 You can use Express middleware to add support for cookies, sessions, and users, getting POST/GET parameters, etc. You can use any database mechanism supported by Node (Express does not define any database-related behaviour).
 
 
 # What does Express code look like?
 
-In a traditional data-driven website, a web application waits for HTTP requests from the web browser (or other client). When a request is received the application works out what action is needed based on the URL pattern and possibly associated information contained in POST data or GET data. Depending on what is required it may then read or write information from a database or perform other tasks required to satisify the request. The application will then return a response to the web browser, often dynamically creating an HTML page for the browser to display by inserting the retrieved data into placeholders in an HTML template.
+Glad you asked! Let's take a look 
 
 
-# Hello Newman
+## Hello, Jerry 
 
 ![hello-newman](https://user-images.githubusercontent.com/6153182/33978843-9e988e24-e06f-11e7-8c9d-e19884cb635a.jpg)
 
-Let's write our first Express code and what it would look like in the browser:
+Let's write our first Express code and see what it would look like in the browser:
 
 ```javascript
 const express = require('express');
@@ -96,11 +80,10 @@ app.listen(3000, function() {
 
 ### What happened?
 
--  1) The first two lines require() (import) the express module and create an Express application. 
+-  1) The first line `require()` imports the express module and creates an Express application. 
+  In the second line this object, which is traditionally named app, now has access to methods for routing HTTP requests, configuring middleware, rendering HTML views, registering a template engine, and modifying
 
-This object, which is traditionally named app, has methods for routing HTTP requests, configuring middleware, rendering HTML views, registering a template engine, and modifying
-
--  2) The middle part of the code (the three lines starting with app.get) shows a route definition. The app.get() method specifies a callback function that will be invoked whenever there is an HTTP GET request with a path ('/') relative to the site root. The callback function takes a request and a response object as arguments, and simply calls send() on the response to return the string "Hello World!"
+-  2) The middle part of the code (ie `app.get`) shows a route definition. The `app.get()` method specifies a callback function that will be invoked whenever there is an HTTP GET request with a path ('/') relative to the site root. The callback function takes a request and a response object as arguments, and simply calls send() on the response to return the string "Hello World!"
 
 -  3) The final block starts up the server on port '3000' and prints a log comment to the console. With the server running, you could go to localhost:3000 in your browser to see the example response returned.
 
@@ -113,9 +96,10 @@ Express is itself a module!
 # Codealong time!
 ![Alt Text](https://media.giphy.com/media/y2Q0yPt4cCkbS/giphy.gif)
 
-## Let's create a Quotes app using Express
+## Let's get our feet wet with Express by building a Quotes app
 
-Get to it:
+
+Let's get to it:
 
 1. `mkdir express-quotes`
 2. `cd express-quotes`
