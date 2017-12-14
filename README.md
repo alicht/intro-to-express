@@ -2,9 +2,9 @@
 
 ## Learning objectives
 
-* Explain what Prototypes are and demonstrate why they're an essential JavaScript feature
+* Asynchronous and why it's so powerful
 * What MVC is 
-* Use the ```new``` keyword to create new objects with shared properties
+* Why use Express over Node?
 * Create a class that inherits from another using ```extends``` and ```super``` keywords
 
 ## Demonstrating Asynchronous API
@@ -80,12 +80,12 @@ app.listen(3000, function() {
 
 ### What happened?
 
--  1) The first line `require()` imports the express module and creates an Express application. 
-In the second line this object, which is traditionally named app, now has access to methods for routing HTTP requests, configuring middleware, rendering HTML views, registering a template engine, and modifying
+-  The first line `require()` imports the express module and creates an Express application. 
+-  In the second line this object, which is traditionally named app, now has access to methods for routing HTTP requests, configuring middleware, rendering HTML views, registering a template engine, and modifying
 
--  2) The middle part of the code (ie `app.get`) shows a route definition. The `app.get()` method specifies a callback function that will be invoked whenever there is an HTTP GET request with a path ('/') relative to the site root. The callback function takes a request and a response object as arguments, and simply calls send() on the response to return the string "Hello World!"
+-  The middle part of the code (ie `app.get`) shows a route definition. The `app.get()` method specifies a callback function that will be invoked whenever there is an HTTP GET request with a path ('/') relative to the site root. The callback function takes a request and a response object as arguments, and simply calls send() on the response to return the string "Hello World!"
 
--  3) The final block starts up the server on port '3000' and prints a log comment to the console. With the server running, you could go to localhost:3000 in your browser to see the example response returned.
+-  The final block starts up the server on port '3000' and prints a log comment to the console. With the server running, you could go to localhost:3000 in your browser to see the example response returned.
 
 # Modules
 Express is itself a module!
