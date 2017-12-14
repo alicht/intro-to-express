@@ -3,19 +3,19 @@
 # Demonstrating Asynchronous API
 
 ## Narwhal coffee shop
-![screen shot 2017-12-12 at 11 46 50 pm](https://user-images.githubusercontent.com/6153182/33922157-c8d8f3ce-df96-11e7-9b53-353bb79cd3e2.png)
+![screen shot 2017-12-14 at 1 36 56 am](https://user-images.githubusercontent.com/6153182/33978785-5a6e3e06-e06f-11e7-9362-78611b127468.png)
 
 
 
 let's type this code into our browser
 ```javascript
-console.log('First');
-console.log('Second');
+console.log('insert fancy order');
+console.log('regular black coffee');
 ```
 but what if we were to run this asynchronously?
 ```javascript
 setTimeout(function() {
-   console.log('fancy coffee order');
+   console.log('insert fancy order');
    }, 3000);
 console.log('black coffee');
 ```
@@ -46,21 +46,14 @@ http.createServer(function(request, response) {
 console.log('Server running at http://127.0.0.1:8000/');
 ```
 
-Other common web-development tasks are not directly supported by Node itself. If you want to add specific handling for different HTTP verbs (e.g. GET, POST, DELETE, etc.), separately handle requests at different URL paths ("routes"), serve static files, or use templates to dynamically create the response, then you will need to write the code yourself, or you can avoid reinventing the wheel and use a web framework!
+These common web-development tasks are not directly supported by Node itself. 
+-  If you want to add specific handling for different HTTP verbs (e.g. GET, POST, DELETE, etc.), 
+-  separately handle requests at different URL paths ("routes")
+-  serve static files
+-  use templates to dynamically create the response,
+
 
 # Enter Express
-
--  Write handlers for requests with different HTTP verbs at different URL paths (routes).
--  Integrate with "view" rendering engines in order to generate responses by inserting data into templates.
--  Set common web application settings like the port to use for connecting, and the location of templates that are used for rendering the response.
--  Add additional request processing "middleware" at any point within the request handling pipeline.
-
-While Express itself is fairly minimalist, developers have created compatible middleware packages to address almost any web development problem. There are libraries to work with cookies, sessions, user logins, URL parameters, POST data, security headers, and many more. 
-
-
-# What does Express code look like?
-
-In a traditional data-driven website, a web application waits for HTTP requests from the web browser (or other client). When a request is received the application works out what action is needed based on the URL pattern and possibly associated information contained in POST data or GET data. Depending on what is required it may then read or write information from a database or perform other tasks required to satisify the request. The application will then return a response to the web browser, often dynamically creating an HTML page for the browser to display by inserting the retrieved data into placeholders in an HTML template.
 
 Express...
 -  provides methods to specify what function is called for a particular HTTP verb (GET, POST, SET, etc.) 
@@ -72,14 +65,19 @@ Express...
 You can use Express middleware to add support for cookies, sessions, and users, getting POST/GET parameters, etc. You can use any database mechanism supported by Node (Express does not define any database-related behaviour).
 
 
+# What does Express code look like?
+
+In a traditional data-driven website, a web application waits for HTTP requests from the web browser (or other client). When a request is received the application works out what action is needed based on the URL pattern and possibly associated information contained in POST data or GET data. Depending on what is required it may then read or write information from a database or perform other tasks required to satisify the request. The application will then return a response to the web browser, often dynamically creating an HTML page for the browser to display by inserting the retrieved data into placeholders in an HTML template.
+
+
 # Hello Newman
 
 
 Let's run through Express code and what it would look like in the browser:
 
 ```javascript
-let express = require('express');
-let app = express();
+const express = require('express');
+const app = express();
 
 app.get('/', function(req, res) {
   res.send('Hello, Newman.');
@@ -146,18 +144,19 @@ const express = require('express');
 const app     = express();
 const port    = process.env.PORT || 3000;
 
-app.listen(port);
-console.log(`express-quotes app running on port ${port}...`);
+app.listen(port, function() {
+  console.log('Example app listening on port 3000!');
+});
 ```
-Notice the `listen` verb here - this can also be use, post, put, delete, etc. (As these are methods of the instance of [Express](https://expressjs.com/en/api.html)).
+Notice the `listen` verb here - this can also be use, post, put, delete, etc (these are all methods of the instance of [Express](https://expressjs.com/en/api.html)).
 
-Notice `.env.PORT` we could hardcode the port and set it to 3000, but it's not the best practice, since the port may be not available...
+## Note: Nodemon doesn't work but `npm run dev` does
+What is `nodemon` you ask? It is a utility that will monitor your source file (app.js in our case) and automatically restart server. Otherwise, you would need to run `node app.js` after every small change in your file, annoying right 🙄 . We also need to install it first, hence in your terminal run
 
-In order for this to work, we need to
 ```bash
-touch .env
+npm install --save nodemon
 ```
-and inside set `PORT=5000`.
+
 
 Then, we need to run our app. In your `package.json`, modify "scripts" to reflect this:
 
@@ -168,19 +167,19 @@ Then, we need to run our app. In your `package.json`, modify "scripts" to reflec
     "dev": "nodemon app.js"
   },
 ```
-What is `nodemon` you ask? It is a utility that will monitor your source file (app.js in our case) and automatically restart server. Otherwise, you would need to run `node app.js` after every small change in your file, annoying right 🙄 . We also need to install it first, hence in your terminal run
 
-```bash
-npm install --save nodemon
-```
 
 Navigate to `http://localhost:3000` and voila!
 
 Now this is pretty awesome (isn't it?) but it doesn't really do anything. Plus, what if we want to start creating pages instead and render stuff on the page.
 
-## Routing in Express - Intro (5 mins)
+## Note: Nodemon doesn't work but `npm run dev` does
 
-**Definition:** Routing refers to the definition of application end points (URIs) and how they respond to client requests. They can receive any of the http verbs (GET, POST, PUT, DELETE), and need to be prepared to handle them accordingly. Consider them resource identifiers, where a typical resource can be an image, webpage, music file, or a request to take kick off a function call. A function call could be something like executing a call to update/delete/put an entry in a database.
+# Routing in Express - Intro (5 mins)
+
+**Definition:** Routing refers to the definition of application end points (URIs) and how they respond to client requests. They can receive any of the http verbs (GET, POST, PUT, DELETE), and need to be prepared to handle them accordingly. 
+-  Consider them resource identifiers, where a typical resource can be an image, webpage, music file, or a request to take kick off a function call. 
+-  A function call could be something like executing a call to update/delete/put an entry in a database.
 
 ### Let's break down selective parts of a router
 
@@ -202,7 +201,7 @@ Let's look at routes and handler callback functions in Express routes:
 Example:
 ```javascript
 app.get('/', function(req, res) {
-  res.send('HELLOoOOOoOOoOOOooO, WORLD! <h1>This is ROOT (home) route</h1>');
+  res.send('Hello, Newman! <h1>Newman! #clenchingfist</h1>');
 
 });
 ```
@@ -220,11 +219,11 @@ app.get('/', function(req, res) {
 });
 
 app.get('/quotes', function(req, res) {
-  res.send('You hit quotes route');
+  res.send('You just hit the quotes route!');
 });
 
 app.get('/cats', function(req,res){
-  res.send('This is cats route');
+  res.send('route! there it is');
 })
 ```
 
@@ -233,7 +232,8 @@ At the bottom of `app.js` add  this it will tell express middleware to use every
 ```javascript
 app.use('/quotes', quotes);
 ```
-Then move to work in `routes/quotes.js` and ...
+Then create a new folder and move to work in `routes/quotes.js`.
+
 First we import express into `quotes.js` then we define our _router_ . This is what handles our routing. It's normally better to use this way of doing routes (and extracting them into their own files) as it makes applications more modular, and you won't have a 500 line app.js.
 
 This way we created a dedicated router for this resource (quotes) and namespace its routes.
