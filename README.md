@@ -80,12 +80,14 @@ app.listen(3000, function() {
 
 ### What happened?
 
--  The first line `require()` imports the express module and creates an Express application. 
--  In the second line this object, which is traditionally named app, now has access to methods for routing HTTP requests, configuring middleware, rendering HTML views, registering a template engine, and modifying
+-  **First line** `require()` imports the express module and creates an Express application. 
+-  **Second line** this object, which is traditionally named app, now has access to methods for routing HTTP requests, configuring middleware, rendering HTML views, registering a template engine
 
--  The middle part of the code (ie `app.get`) shows a route definition. The `app.get()` method specifies a callback function that will be invoked whenever there is an HTTP GET request with a path ('/') relative to the site root. The callback function takes a request and a response object as arguments, and simply calls send() on the response to return the string "Hello World!"
+-  **Middle part** of the code (ie `app.get`) shows a route definition. 
 
--  The final block starts up the server on port '3000' and prints a log comment to the console. With the server running, you could go to localhost:3000 in your browser to see the example response returned.
+The `app.get()` specifies a callback function that will be invoked whenever there is an HTTP GET request with a path ('/') relative to the site root. The callback function takes a request and a response object as arguments, and simply calls send() on the response to return the string "Hello, Newman."
+
+-  **Final block** starts up the server on `port '3000'` and prints a log comment to the console. With the server running, we can go to `localhost:3000` in our browser to see the example response returned.
 
 # Modules
 Express is itself a module!
@@ -100,7 +102,7 @@ Express is itself a module!
 
 ![screen shot 2017-12-14 at 9 51 00 am](https://user-images.githubusercontent.com/6153182/33998059-6cefef94-e0b4-11e7-9ffc-46e2de2758c1.png)
 
-Before we get started, let's look at how routes are handled on ESPN.com:
+#### Before we get started, let's look at how routes are handled on ESPN.com:
 
 1. `mkdir express-quotes`
 2. `cd express-quotes`
