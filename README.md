@@ -244,6 +244,9 @@ $ touch routes/quotes.js
 
 Inside this file we need to move all of our route handlers for `quotes` and at the end of the file, we need to export our router:
 
+![screen shot 2017-12-14 at 12 23 44 pm](https://user-images.githubusercontent.com/6153182/34005699-c735a11e-e0c9-11e7-8983-5b98d220d074.png)
+
+
 ### Benefits of using express.Router():
 
 - Helpful in separating out concerns
