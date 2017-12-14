@@ -2,10 +2,11 @@
 
 ## Learning objectives
 
-* Asynchronous and why it's so powerful
+* Asynchronous JS and why it's so powerful
 * What MVC is 
 * Why use Express over Node?
-* Create a class that inherits from another using ```extends``` and ```super``` keywords
+* Breaking down everything that goes into a route response cycle
+* Coding along our first Express app!
 
 ## Demonstrating Asynchronous API
 
@@ -36,7 +37,7 @@ Using non-blocking asynchronous APIs is even more important on Node than in the 
 
 ![Alt Text](https://media.giphy.com/media/zhG2sDdPpXgDS/giphy.gif)
 
-## Ok fine- here's a more "computer-y" image 
+## Ok fine- here's a more "computer-y" image :expressionless:
 
 ![complete-mvc-on-nodejs-26-638](https://user-images.githubusercontent.com/6153182/34004783-d5e7cc80-e0c6-11e7-946d-39a263264e38.jpg)
 
@@ -51,6 +52,8 @@ These common web-development tasks are not directly supported by Node itself.
 
 
 # Enter Express
+
+![sans --save](https://user-images.githubusercontent.com/6153182/34006504-9786a49c-e0cc-11e7-8aac-3c255467767c.png)
 
 You can use Express middleware to add support for cookies, sessions, and users, getting POST/GET parameters, etc. You can use any database mechanism supported by Node (Express does not define any database-related behaviour).
 
@@ -87,9 +90,9 @@ app.listen(3000, function() {
 ### Breakdown- what happened?
 
 -  **First line** `require()` imports the express module and creates an Express application. 
--  **Second line** this object, which is traditionally named app, now has access to methods for routing HTTP requests, configuring middleware, rendering HTML views, registering a template engine
+-  **Second line** this object, which is traditionally named `app`, now has access to methods for routing HTTP requests, configuring middleware, rendering HTML views, and registering a template engine (among others).
 
--  **Middle part** of the code (ie `app.get`) shows a route definition.  We'll touch on this in more detail below.
+-  **Middle part** of the code (ie `app.get`) shows a route definition--  we'll touch on this in more detail below.
 
 The `app.get()` specifies a callback function that will be invoked whenever there is an HTTP GET request with a path ('/') relative to the site root. The callback function takes a request and a response object as arguments, and simply calls send() on the response to return the string "Hello, Newman."
 
@@ -184,7 +187,8 @@ Now this is pretty sweet but it's just a static page. Plus, what if we want to s
 
 [ExpressJS 4.0](https://scotch.io/tutorials/learn-to-use-the-new-router-in-expressjs-4) comes with the new Router. Router is like a mini Express application. It doesn’t bring in views or settings but provides us with the routing APIs like `.use`, `.get`, `route` etc..
 
-Let's look at routes and handler callback functions in Express routes:
+# Let's look at routes and handler callback functions in Express routes:
+
 ### An Example in play:
 ```javascript
 app.get('/', function(req, res) {
