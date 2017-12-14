@@ -208,6 +208,13 @@ app.get('/cats', function(req,res){
 
 ### but we're hear to build a quotes app, so let's focus on that 
 
+##### (side point)... where are we getting the quotes we'll be referring to?
+
+Glad you asked! (see accompanying folder)
+- `mkdir db` & `touch quotes.js`, paste boilerplate code 
+
+### back to our app.js
+
 At the bottom of `app.js` we're going to add:
 
 ```javascript
@@ -216,25 +223,7 @@ app.use('/quotes', quotes);
 #### Why?
 this it will tell express middleware to use everything associated with quotes route and add a callback `quotes` to be executes on call:
 
-```javascript
-app.use('/quotes', quotes);
-```
-Then create a new folder and move to work in `routes/quotes.js`.
-
-First we import express into `quotes.js` then we define our _router_ . This is what handles our routing. It's normally better to use this way of doing routes (and extracting them into their own files) as it makes applications more modular, and you won't have a 500 line app.js.
-
-This way we created a dedicated router for this resource (quotes) and namespace its routes.
-Hence we can separate all the route handlers in the different file: `routes/quotes.js` => Take out the from `app.js`
-
-```js
-function(req, res) {
-  res.send('You hit quotes route');
-}
-```
-and bring it to the quotes module, give a name to that function, and...
-
-REMEMBER: to export it! 👍
-
+### We should probably create a separate routes folder for our quotes code...
 
 #### Creating a quotes module
 
@@ -247,30 +236,29 @@ $ touch routes/quotes.js
 
 Inside this file we need to move all of our route handlers for `quotes` and at the end of the file, we need to export our router:
 
+```javascript
+const express = require('express');
+const router = express.Router();
+```
+
+and don't forget to include the quotes we'll be using!
+
+```javascript
+const quotes = require('../db/quotes');
+```
+
 Now let's go back to our `app.js`, and we need to require this route at the top so we can access it:
 
 ```javascript
 const quotes = require('./routes/quotes');
 ```
 
-
+in our `routes/quotes.js` we have to add this so we can export it. 
 ```javascript
-const router  = express.Router();
-
-router.get('/', function(req, res) {
-  res.send('This still works 👍');
-});
-
 module.exports = router;
 ```
 > Note: don't forget to import the quotes as well :)
 
-Now let's go back to our app.js, let's require this router at the top:
-
-```javascript
-const quotes = require('./routes/quotes');
-
-```
 
 ## Restful Routing 
 
@@ -304,10 +292,4 @@ router.get('/:id', function(req, res){
 ## Independent Practice (30 minutes)
 
 In the LECTURE directory you will find a `lab` folder. Look for instructions there.
-
-
-
-
-
-
 
