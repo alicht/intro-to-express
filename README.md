@@ -72,8 +72,9 @@ In a traditional data-driven website, a web application waits for HTTP requests 
 
 # Hello Newman
 
+![hello-newman](https://user-images.githubusercontent.com/6153182/33978843-9e988e24-e06f-11e7-8c9d-e19884cb635a.jpg)
 
-Let's run through Express code and what it would look like in the browser:
+Let's write our first Express code and what it would look like in the browser:
 
 ```javascript
 const express = require('express');
@@ -108,17 +109,11 @@ Express is itself a module!
 
 -  A module is a JavaScript library/file that you can import into other code using Node's require() function. Express itself is a module, as are the middleware and database libraries that we use in our Express applications.
 
-The code below shows how we import a module by name, using the Express framework as an example. First we invoke the require() function, specifying the name of the module as a string ('express'), and calling the returned object to create an Express application. We can then access the properties and functions of the application object.
 
-```javascript
-let express = require('express');
-let app = express();
-You can also create your own modules that can be imported in the same way.
-```
+# Codealong time!
+![Alt Text](https://media.giphy.com/media/y2Q0yPt4cCkbS/giphy.gif)
 
-
-
-## Let's create Quotes app using Node and Express - I do - You do (20 min)
+## Let's create a Quotes app using Express
 
 Get to it:
 
