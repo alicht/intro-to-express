@@ -81,7 +81,7 @@ app.listen(3000, function() {
 ### What happened?
 
 -  1) The first line `require()` imports the express module and creates an Express application. 
-  In the second line this object, which is traditionally named app, now has access to methods for routing HTTP requests, configuring middleware, rendering HTML views, registering a template engine, and modifying
+In the second line this object, which is traditionally named app, now has access to methods for routing HTTP requests, configuring middleware, rendering HTML views, registering a template engine, and modifying
 
 -  2) The middle part of the code (ie `app.get`) shows a route definition. The `app.get()` method specifies a callback function that will be invoked whenever there is an HTTP GET request with a path ('/') relative to the site root. The callback function takes a request and a response object as arguments, and simply calls send() on the response to return the string "Hello World!"
 
@@ -156,7 +156,7 @@ Now this is pretty sweet but it's just a static page. Plus, what if we want to s
 
 # Routing in Express 
 
-**Definition:** Routing refers to the definition of application end points (URIs) and how they respond to client requests. They can receive any of the http verbs (GET, POST, PUT, DELETE), and need to be prepared to handle them accordingly. 
+**Routing** is the definition of application end points (URIs) and how they respond to client requests. They can receive any of the HTTP verbs (GET, POST, PUT, DELETE), and need to be prepared to handle them accordingly. 
 -  Consider them resource identifiers, where a typical resource can be an image, webpage, music file, or a request to take kick off a function call. 
 -  A function call could be something like executing a call to update/delete/put an entry in a database.
 
@@ -208,8 +208,6 @@ app.get('/cats', function(req,res){
 
 ### but we're hear to build a quotes app, so let's focus on that 
 
-
-
 At the bottom of `app.js` we're going to add:
 
 ```javascript
@@ -256,8 +254,6 @@ const quotes = require('./routes/quotes');
 ```
 
 
-
-
 ```javascript
 const router  = express.Router();
 
@@ -278,7 +274,7 @@ const quotes = require('./routes/quotes');
 
 ## Restful Routing 
 
-We will use the RESTful standard to build our web apps. Today, we will only cover how to handle GET requests, but we can create callbacks for all types of requests. Let's create some routes for our quotes!
+We will use the RESTful standard to build our web apps. Today, we'll only cover how to handle GET requests, but we can create callbacks for all types of requests. Let's create some routes for our quotes!
 
 ```javascript
 // set up root route using 'GET' http verb
@@ -309,8 +305,7 @@ router.get('/:id', function(req, res){
 
 In the LECTURE directory you will find a `lab` folder. Look for instructions there.
 
-## Conclusion (5 mins)
-A framework can be overwhelming at the start, after a couple of days you will see how it makes your life easier.  We will work more on how to make RESTful controllers, this is just an introduction.
+
 
 
 
