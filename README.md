@@ -180,7 +180,7 @@ Now this is pretty awesome (isn't it?) but it doesn't really do anything. Plus, 
 
 - **"/"**: Sets the pattern for our route. In this case, it's the root page
 - **req**: Represents incoming http `request` object for end point resource.
-- **res**: Represents the `resource` object that you give to the user/client/requestor. Resource can be a webpage, video file etc...
+- **res**: Represents the `response` object that you give to the user/client/requestor. Resource can be a webpage, video file etc...
 **Since both `req` and `res` are objects, they have various methods we can use to manipulate**
 - **res.send:** is one of the methods of `response` object. It sends the response back to the requestor.
 
@@ -210,7 +210,7 @@ const app     = express();
 const port    = process.env.PORT || 3000;
 
 app.get('/', function(req, res) {
-  res.send('HELLOoOOOoOOoOOOooO, WORLD! <h1>This is ROOT route</h1>');
+  res.send('Hello, Newman! <h1>Newman! #clenchingfist </h1>');
 });
 
 app.get('/quotes', function(req, res) {
@@ -275,7 +275,7 @@ const quotes = require('./routes/quotes');
 
 ## Restful Routing - Intro (10 mins)
 
-We will use the RESTful (should be familiar for you since Vince introduced it on Monday) standard to build our web apps. Today, we will only cover how to handle GET requests, but we can create callbacks for all types of requests. Let's create some routes for our quotes!
+We will use the RESTful standard to build our web apps. Today, we will only cover how to handle GET requests, but we can create callbacks for all types of requests. Let's create some routes for our quotes!
 
 ```javascript
 // set up root route using 'GET' http verb
