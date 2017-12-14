@@ -94,12 +94,13 @@ Express is itself a module!
 
 
 # Codealong time!
-![Alt Text](https://media.giphy.com/media/y2Q0yPt4cCkbS/giphy.gif)
+
 
 ## Let's get our feet wet with Express by building a Quotes app
 
+![screen shot 2017-12-14 at 9 51 00 am](https://user-images.githubusercontent.com/6153182/33998059-6cefef94-e0b4-11e7-9ffc-46e2de2758c1.png)
 
-Let's get to it:
+Before we get started, let's look at how routes are handled on ESPN.com:
 
 1. `mkdir express-quotes`
 2. `cd express-quotes`
@@ -120,8 +121,8 @@ Let's start coding!
 ```javascript
 // app.js
 const express = require('express');
-const app     = express();
-const port    = process.env.PORT || 3000;
+const app = express();
+const port = process.env.PORT || 3000;
 
 app.listen(port, function() {
   console.log('Example app listening on port 3000!');
@@ -151,7 +152,7 @@ run `npm node dev`
 
 Navigate to `http://localhost:3000` and... boom! goes the dynamite.
 
-Now this is pretty awesome (isn't it?) but it doesn't really do anything. Plus, what if we want to start creating pages instead and render stuff on the page.
+Now this is pretty sweet but it's just a static page. Plus, what if we want to start creating pages instead and render stuff on the page?
 
 # Routing in Express 
 
